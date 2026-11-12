@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercises — Talkbeats</title>
+<meta name="description" content="Practice product management case studies. Learn the Spine — the seven-move structure behind a strong product answer — then try one yourself.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ===== Exercise feature — scoped .ex-, uses the site's own CSS variables ===== */
+  .ex-grid{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:start;margin-top:6px}
+  .ex-rail{position:sticky;top:24px}
+  .ex-rt{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .ex-spine{list-style:none;display:flex;flex-direction:column;gap:2px}
+  .ex-snode{display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:7px;transition:background .2s}
+  .ex-snode .d{width:24px;height:24px;border-radius:6px;border:1.5px solid var(--line);display:grid;place-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0;transition:.2s}
+  .ex-snode .nm{font-size:13.5px;color:var(--muted);transition:color .2s}
+  .ex-snode.done .d{background:var(--blue);border-color:var(--blue);color:#fff}
+  .ex-snode.done .nm{color:var(--text)}
+  .ex-snode.now{background:#FBF3E0}
+  .ex-snode.now .d{border-color:var(--gold);color:var(--gold)}
+  .ex-snode.now .nm{color:var(--ink);font-weight:600}
+  .ex-snode .d svg{width:12px;height:12px}
+
+  .ex-case{background:var(--ink);color:#fff;border-radius:8px;padding:15px 18px;margin-bottom:22px}
+  .ex-case .l{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#9FB4CC;margin-bottom:5px}
+  .ex-case .q{font-size:16px;font-weight:600;line-height:1.35}
+
+  .ex-panel{animation:exfade .35s ease}
+  @keyframes exfade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+  .ex-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:10px}
+  .ex-panel h3{font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.01em;line-height:1.22;margin-bottom:11px}
+  .ex-principle{font-size:16px;color:var(--text);line-height:1.6;margin-bottom:20px}
+  .ex-applied{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:16px 18px}
+  .ex-applied .al{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:9px}
+  .ex-applied .atxt{font-size:14.5px;line-height:1.62;color:var(--text)}
+  .ex-tip{display:flex;gap:10px;align-items:flex-start;margin-top:15px;font-size:13px;color:var(--muted);line-height:1.5}
+  .ex-tip svg{width:15px;height:15px;color:var(--gold);flex-shrink:0;margin-top:2px}
+  .ex-tip b{color:var(--ink);font-weight:600}
+
+  .ex-nav{display:flex;align-items:center;justify-content:space-between;margin-top:26px}
+  .ex-back{background:none;border:none;color:var(--muted);font:inherit;font-size:14px;cursor:pointer;padding:8px 2px}
+  .ex-back:hover{color:var(--blue)} .ex-back.hidden{visibility:hidden}
+
+  .ex-intro .big{font-size:24px;font-weight:700;color:var(--ink);letter-spacing:-.01em;line-height:1.22;margin-bottom:11px}
+  .ex-intro p{font-size:16px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+
+  .ex-assembled{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 20px;line-height:1.7;font-size:14.5px;color:var(--text)}
+  .ex-assembled .tag{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.05em;font-weight:600;display:block;margin-top:12px;margin-bottom:1px}
+  .ex-assembled .tag:first-child{margin-top:0}
+
+  .ex-yt{margin-top:50px;border-top:1px solid var(--line);padding-top:42px}
+  .ex-yt .ytk{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px}
+  .ex-yt h3{font-size:22px;font-weight:700;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
+  .ex-yt p.sub{color:var(--muted);margin-bottom:18px;font-size:15px}
+  .ex-ytcase{background:#FBF3E0;border:1px solid #ECDCB4;border-radius:8px;padding:14px 17px;margin-bottom:15px}
+  .ex-ytcase .l{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:4px}
+  .ex-ytcase .q{font-size:16px;font-weight:600;color:var(--ink)}
+  .ex-ta{width:100%;min-height:150px;border:1px solid var(--line);border-radius:8px;padding:14px;font-family:inherit;font-size:14.5px;color:var(--text);line-height:1.6;resize:vertical;background:#fff;outline:none}
+  .ex-ta:focus{border-color:var(--blue)}
+  .ex-ta::placeholder{color:var(--muted);opacity:.75}
+  .ex-ytact{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .ex-note{font-size:12.5px;color:var(--muted)}
+  .ex-model{margin-top:18px;display:none}
+  .ex-model.show{display:block;animation:exfade .35s ease}
+  .ex-model .ml{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px}
+
+  @media(max-width:720px){
+    .ex-grid{grid-template-columns:1fr;gap:16px}
+    .ex-rail{position:static}
+    .ex-spine{flex-direction:row;flex-wrap:wrap;gap:6px}
+    .ex-snode .nm{display:none}.ex-snode.now .nm{display:inline}
+  }
+  @media(prefers-reduced-motion:reduce){.ex-panel,.ex-model{animation:none}}
+</style>
+
+<!-- Contentsquare / Hotjar -->
+<script src="https://t.contentsquare.net/uxa/6ddab5fcd6267.js" defer></script>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="/"><b>Talkbeats</b></a>
+    <ul class="nav-links">
+      <li><a href='/writing'>writing</a></li>
+      <li><a href='/case-studies'>case studies</a></li>
+      <li><a href='/resources'>resources</a></li>
+      <li><a class='active' href='/exercises'>exercises</a></li>
+      <li><a href='/about'>about</a></li>
+      <li><a href='/contact'>contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Exercises</p>
+    <h1>Practice your product thinking.</h1>
+    <p class="hero-sub">Most product interview answers fall apart for the same reason: no structure. Learn the Spine, the seven moves that hold up any case, then try one yourself.</p>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="wrap-narrow">
+
+    <div class="ex-grid">
+      <aside class="ex-rail">
+        <div class="ex-rt">The Spine</div>
+        <ol class="ex-spine" id="exSpine"></ol>
+      </aside>
+      <div id="exMain"></div>
+    </div>
+
+    <div class="ex-yt">
+      <div class="ytk">Your turn</div>
+      <h3>Run the Spine on a fresh case.</h3>
+      <p class="sub">Write your answer using the seven moves. When you're done, reveal a model answer and compare your structure.</p>
+      <div class="ex-ytcase">
+        <div class="l">Product Sense</div>
+        <div class="q">Design a product to help remote workers feel less isolated.</div>
+      </div>
+      <form name="pm-exercise" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="exForm">
+        <input type="hidden" name="form-name" value="pm-exercise">
+        <p class="ex-hp"><label>Leave this field empty: <input name="bot-field"></label></p>
+        <input type="hidden" name="case" value="Design a product to help remote workers feel less isolated.">
+
+        <textarea class="ex-ta" id="exTa" name="answer" placeholder="Clarify the goal… pick one user… name their sharpest pain… a few ideas… pick one and say what you cut… a success metric and a guardrail… then recommend."></textarea>
+
+        <div class="ex-ytact">
+          <button type="submit" class="btn btn-primary" id="exSubmit">Submit &amp; reveal model answer</button>
+          <button type="button" class="btn btn-ghost" id="exReveal">Just show the model answer</button>
+        </div>
+        <p class="ex-consent" id="exConsent">Submitting sends your answer to me so I can see how people approach the case. Don't include anything confidential. Or skip it and just reveal the model answer.</p>
+        <p class="ex-thanks" id="exThanks" hidden>Thanks — your answer came through. Model answer below.</p>
+      </form>
+      <div class="ex-model" id="exModel">
+        <div class="ml">Model answer · structured on the Spine</div>
+        <div class="ex-assembled">
+          <span class="tag">Clarify</span>Helping people who already work remote feel connected day to day, not one-off events. Scope to a work tool.
+          <span class="tag">User</span>The fully-remote individual contributor with no local teammates, whose only contact is scheduled video calls.
+          <span class="tag">Pain</span>No low-stakes, ambient contact. Every interaction has to be booked, so the small moments that build belonging never happen.
+          <span class="tag">Ideas</span>Always-on co-working audio rooms, a daily async check-in with photos, interest-based small groups, a tap-to-say-hi presence layer.
+          <span class="tag">Prioritise</span>Build the presence layer first. It hits the ambient-contact pain and needs no scheduling. Cut the audio rooms for now, they ask a lot of a shy user.
+          <span class="tag">Success</span>Weekly active connections per person. Guardrail: self-reported belonging, so we're not just driving pings that annoy people.
+          <span class="tag">Recommend</span>For isolated remote ICs, ship a presence layer that makes saying hi effortless, measured on weekly connections with a belonging guardrail. Then test co-working rooms.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <h2 class="label">Talkbeats</h2>
+    <p class="contact-line beats-line">Let your beats do the talking.</p>
+    <div class="contact-links">
+      <a href='/about'>About</a>
+      <a href='/contact'>Contact</a>
+    </div>
+    <p class="foot-note">© 2026 Talkbeats</p>
+  </div>
+</footer>
+
+<div class="fab-wrap">
+  <div class="fab-menu" id="fabMenu">
+    <a class="fab-item" id="fabEmail" href="mailto:chandragaur.pm@gmail.com" data-email="chandragaur.pm@gmail.com">✉️ <span class="fab-email-label">Email me</span></a>
+    <a class="fab-item" href="https://x.com/chandragaur_pm" target="_blank" rel="noopener">𝕏 Twitter</a>
+  </div>
+  <button class="fab-main" id="fabBtn" aria-label="Contact options">+</button>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('fabBtn'), menu=document.getElementById('fabMenu'), open=false;
+  btn.addEventListener('click', function(){
+    open=!open; menu.classList.toggle('open', open); btn.textContent = open ? '\u00d7' : '+';
+  });
+  var em=document.getElementById('fabEmail');
+  if(em){
+    em.addEventListener('click', function(){
+      var addr=em.getAttribute('data-email');
+      var lbl=em.querySelector('.fab-email-label');
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(addr).then(function(){
+          lbl.textContent='Address copied';
+          em.classList.add('copied');
+          setTimeout(function(){ lbl.textContent='Email me'; em.classList.remove('copied'); },2000);
+        }).catch(function(){});
+      }
+    });
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var SPINE=[
+    {name:'Clarify',title:'Clarify before you solve.',principle:"Pin down what you're actually solving. A few sharp questions now keep every later move honest.",applied:"First, the goal. Are we helping people start, or helping people who've started keep going? I'll assume keep going, because the real problem is the drop-off after week two. And I'll scope this to a phone app, not hardware.",tip:"Graders reward clarifying questions that <b>change your answer</b>, not throat-clearing."},
+    {name:'Pick a user',title:'Choose one specific person.',principle:"Design for one real human, never 'everyone.' The narrower the person, the sharper every choice that follows.",applied:"I'll design for the first-time gym-goer in their opening month. Intimidated, unsure what to do, quietly comparing themselves to the regulars.",tip:"Solving for <b>one real person</b> is the biggest thing that separates a strong answer from an average one."},
+    {name:'Find the pain',title:'Name the real pain, then pick the sharpest.',principle:"List what makes life hard for your user, then commit to the one pain that matters most, with a reason.",applied:"Their pains: they don't know what to do, they feel judged, they see no progress fast enough, and life gets busy. The sharpest is 'no visible progress,' because that's what kills motivation around week two.",tip:"Prioritising <b>one pain with a reason</b> beats listing ten pains flatly."},
+    {name:'Generate ideas',title:'Come up with a few ideas.',principle:"Put two to four distinct solutions on the table, and push for at least one that isn't obvious.",applied:"Options: a guided 4-week beginner plan, a 'tiny wins' tracker that celebrates showing up, a buddy match, an AI form-check. The non-obvious one is rewarding attendance over performance.",tip:"<b>Distinct ideas tied to the pain</b> you chose, not one obvious feature."},
+    {name:'Prioritise',title:'Pick one. Say what you cut.',principle:"Choose what to build first, and state out loud what you're not building and why.",applied:"I'd build the 'tiny wins' tracker first. It hits the sharpest pain, it's light to build, and it works from day one. I'm cutting the buddy match for now, it needs a user network we don't have yet.",tip:"A clear MVP with an <b>explicit tradeoff</b>. Saying what you're not doing is a senior move."},
+    {name:'Define success',title:'Decide how you would know it worked.',principle:"One main metric tied to the goal, plus one guardrail that catches the metric being gamed.",applied:"Main metric: week-4 retention of new members. Guardrail: I'd also watch average session length, so we're not just inflating check-ins.",tip:"A <b>primary metric plus a guardrail</b> shows you've thought about what could go wrong."},
+    {name:'Recommend',title:'Land it in two lines.',principle:"Close with a crisp recommendation. State the user, the pain, the build, and the metric. Then commit.",applied:"So: for first-month gym-goers who quit when they see no progress, I'd ship a tiny-wins tracker that rewards showing up, measured on week-4 retention. Then I'd test the buddy match.",tip:"<b>Commit.</b> Strong analysis with no clear recommendation caps your score. PMs decide."}
+  ];
+  var CASE="Design a product to help first-time gym-goers stick with it.";
+  var TICK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>';
+  var BULB='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg>';
+  var idx=0, N=SPINE.length;
+  var spineEl=document.getElementById('exSpine'), mainEl=document.getElementById('exMain');
+
+  function spine(){
+    spineEl.innerHTML=SPINE.map(function(s,i){
+      var no=i+1, cls='', inner=no;
+      if(no<idx||idx===N+1){cls='done';inner=TICK;} else if(no===idx){cls='now';}
+      return '<li class="ex-snode '+cls+'"><span class="d">'+inner+'</span><span class="nm">'+s.name+'</span></li>';
+    }).join('');
+  }
+  function cb(){return '<div class="ex-case"><div class="l">Worked example · Product Sense</div><div class="q">'+CASE+'</div></div>';}
+  function render(){
+    spine();
+    if(idx===0) intro();
+    else if(idx>=1&&idx<=N) step(idx-1);
+    else recap();
+  }
+  function intro(){
+    mainEl.innerHTML=cb()+'<div class="ex-panel ex-intro"><div class="ex-eyebrow">The framework</div><div class="big">Every strong product answer has the same spine.</div><p>Seven moves, in order. Learn them once and you can structure any case, from "design an app" to "a metric just dropped."</p><p>We\'ll walk the Spine on the example above, then you\'ll run it on a fresh case below.</p><div class="ex-nav"><button class="ex-back hidden">←</button><button class="btn btn-primary" id="exNext">Walk me through it →</button></div></div>';
+    wire();
+  }
+  function step(i){
+    var s=SPINE[i];
+    mainEl.innerHTML=cb()+'<div class="ex-panel"><div class="ex-eyebrow">Step '+(i+1)+' · '+s.name+'</div><h3>'+s.title+'</h3><p class="ex-principle">'+s.principle+'</p><div class="ex-applied"><div class="al">See it applied</div><div class="atxt">'+s.applied+'</div></div><div class="ex-tip">'+BULB+'<div>'+s.tip+'</div></div><div class="ex-nav"><button class="ex-back" id="exBack">← Back</button><button class="btn btn-primary" id="exNext">'+(i===N-1?'See it all together →':'Next move →')+'</button></div></div>';
+    wire();
+  }
+  function recap(){
+    mainEl.innerHTML=cb()+'<div class="ex-panel"><div class="ex-eyebrow">The whole answer</div><h3>That\'s the Spine, start to finish.</h3><p class="ex-principle">Here\'s the full worked answer, assembled from the seven moves. This is the shape you\'re aiming for.</p><div class="ex-assembled"><span class="tag">Clarify</span>Helping first-timers keep going, not just start. Phone app.<span class="tag">User</span>The first-month gym-goer, intimidated and comparing themselves to regulars.<span class="tag">Pain</span>No visible progress, which is what kills motivation by week two.<span class="tag">Ideas</span>Beginner plan, tiny-wins tracker, buddy match, AI form-check.<span class="tag">Prioritise</span>Build the tiny-wins tracker first. Cut the buddy match for now.<span class="tag">Success</span>Week-4 retention, with session length as a guardrail.<span class="tag">Recommend</span>Ship a tiny-wins tracker that rewards showing up, measured on week-4 retention. Then test the buddy match.</div><div class="ex-nav"><button class="ex-back" id="exBack">← Back</button><button class="btn btn-primary" id="exNext">Try one yourself ↓</button></div></div>';
+    wire();
+    var nx=document.getElementById('exNext'); if(nx) nx.onclick=function(){document.getElementById('exTa').scrollIntoView({behavior:'smooth',block:'center'});};
+  }
+  function wire(){
+    var n=document.getElementById('exNext');
+    if(n&&idx<=N) n.onclick=function(){idx++;render();var t=document.querySelector('.ex-grid');if(t)window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-90,behavior:'smooth'});};
+    var b=document.getElementById('exBack'); if(b) b.onclick=function(){idx--;render();};
+  }
+  var form=document.getElementById('exForm'),
+      reveal=document.getElementById('exReveal'),
+      submit=document.getElementById('exSubmit'),
+      model=document.getElementById('exModel'),
+      thanks=document.getElementById('exThanks'),
+      consent=document.getElementById('exConsent'),
+      ta=document.getElementById('exTa');
+
+  function showModel(){
+    model.classList.add('show');
+    reveal.disabled=true; reveal.style.opacity=.5; reveal.style.cursor='default';
+    model.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  reveal.addEventListener('click', showModel);
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!ta.value.trim()){ ta.focus(); return; }
+    submit.disabled=true; submit.textContent='Sending…';
+    var data=new URLSearchParams(new FormData(form)).toString();
+    fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:data})
+      .then(function(){
+        submit.textContent='Submitted';
+        consent.hidden=true; thanks.hidden=false;
+        showModel();
+      })
+      .catch(function(){
+        submit.disabled=false; submit.textContent='Submit & reveal model answer';
+        consent.textContent="Couldn't send that — but here's the model answer anyway.";
+        showModel();
+      });
+  });
+  render();
+})();
+</script>
+</body>
+</html>

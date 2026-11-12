@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Studies — Talkbeats</title>
+<meta name="description" content="Real product case studies from fintech, lending, and payments work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<!-- Contentsquare / Hotjar -->
+<script src="https://t.contentsquare.net/uxa/6ddab5fcd6267.js" defer></script>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="/"><b>Talkbeats</b></a>
+    <ul class="nav-links">
+      <li><a href='/writing'>writing</a></li>
+      <li><a class='active' href='/case-studies'>case studies</a></li>
+      <li><a href='/resources'>resources</a></li>
+      <li><a href='/exercises'>exercises</a></li>
+      <li><a href='/about'>about</a></li>
+      <li><a href='/contact'>contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Case Studies</p>
+    <h1>Real problems, real numbers.</h1>
+    <p class="hero-sub">Product work from fintech, lending, and payments — what the problem actually was, and what changed.</p>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="wrap">
+    <div class="case">
+      <h3>Building the loan origination platform thousands of partners ran on</h3>
+      <p class="case-sub">B2B2C loan origination platform · API & partner integrations</p>
+      <p>
+        A loan origination platform's growth was capped by how long it took to onboard a new partner —
+        weeks of manual integration work per partner, which didn't scale against an ambitious distribution plan.
+      </p>
+      <p>
+        The fix was a configurable, API-led onboarding layer instead of bespoke integration work each time:
+        a documented API suite, standard onboarding flows, and a payments and reconciliation layer that worked
+        the same way across every gateway.
+      </p>
+      <div class="case-metrics">
+        <div class="cm"><div class="n">Hundreds</div><div class="l">of ₹Cr in monthly disbursals</div></div>
+        <div class="cm"><div class="n">Thousands</div><div class="l">of channel partners onboarded</div></div>
+        <div class="cm"><div class="n">~30%</div><div class="l">faster reconciliation turnaround</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="case">
+      <h3>Launching a digital Gold Loan 0-to-1 inside a large consumer app</h3>
+      <p class="case-sub">Secured lending · 0-to-1 launch &amp; signal-driven targeting</p>
+      <p>
+        There was a large eligible base sitting inside the app, a very large existing user base, but no
+        secured-lending product to serve them, and no playbook for turning a cold, eligible user into a funded
+        gold loan. The build was genuinely 0-to-1: the end-to-end digital journey, the integration with the
+        lending partner, and the decisioning that decided who to approach and how.
+      </p>
+      <p>
+        Rather than push the same offer to everyone, I designed the targeting and onboarding logic — which
+        signals to weigh, and in what order — using credit-line indicators, bureau data, live location, network-level
+        signals, and moments-based triggers. The modelling sat with data science; the product work was shaping
+        the workflow and the rules around it, then tightening the journey wherever users were dropping.
+      </p>
+      <div class="case-metrics">
+        <div class="cm"><div class="n">3x</div><div class="l">funnel conversion improvement</div></div>
+        <div class="cm"><div class="n">~35%</div><div class="l">reduction in onboarding drop-off</div></div>
+        <div class="cm"><div class="n">Tens</div><div class="l">of ₹Cr monthly disbursals, within a few quarters</div></div>
+      </div>
+      <p style="margin-top:22px"><a href='/posts/case-gold-loan'>Read the full story →</a></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="case">
+      <h3>Matching the right partner to the right relationship manager</h3>
+      <p class="case-sub">B2B2C lending operations · Signal-based matching</p>
+      <p>
+        Across tens of thousands of sub-DSA partners spread over thousands of pincodes, routing partners to relationship
+        managers by hand didn't scale — and bad matches quietly cost conversion further down the funnel, between
+        a partner accepting terms and the loan actually disbursing.
+      </p>
+      <p>
+        I designed a matching engine that paired each DSA to an RM using pincode, credit eligibility, the RM's
+        coverage area, and their current bandwidth — defining the matching rules and the logic for trade-offs
+        when signals conflicted, then partnering with data science to run it at scale. Practitioner decisioning,
+        not model-building.
+      </p>
+      <div class="case-metrics">
+        <div class="cm"><div class="n">~25%</div><div class="l">lift in terms-acceptance to KYC</div></div>
+        <div class="cm"><div class="n">~10%</div><div class="l">lift in KYC to disbursal</div></div>
+        <div class="cm"><div class="n">10,000s</div><div class="l">sub-DSA partners routed</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="case">
+      <h3>Getting co-branded cards activated, not just issued</h3>
+      <p class="case-sub">Co-branded EMI card · Activation &amp; AI-led recommendations</p>
+      <p>
+        Issuing a card is the easy half. The harder half is getting it activated and used — closing the gap
+        between cardholders who simply hold the card and the smaller set actually transacting on consumer-durable
+        loans. Issuance had scaled into the hundreds of thousands of cards cumulatively, with strong monthly peaks, so the
+        constraint had clearly moved from acquisition to activation.
+      </p>
+      <p>
+        The lever was relevance: surfacing the right store deals and OEM offers to each cardholder based on their
+        credit profile, location, and network signals. I owned the decisioning design — which offers go to whom,
+        and when — working with data science to operationalise it, alongside in-store activation at partner
+        counters. Activation was tracked by cohort rather than as a single blended number.
+      </p>
+      <div class="case-metrics">
+        <div class="cm"><div class="n">~2x</div><div class="l">activation lift, month-1 cohort</div></div>
+        <div class="cm"><div class="n">~50%</div><div class="l">activation lift, month-11 cohort</div></div>
+        <div class="cm"><div class="n">Tens</div><div class="l">of ₹Cr in consumer-durable loans</div></div>
+      </div>
+      <p style="margin-top:22px"><a href='/posts/case-emi-activation'>Read the full story →</a></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="case">
+      <h3>Risk-based onboarding: which checks, for which user</h3>
+      <p class="case-sub">Co-branded EMI card · Onboarding & KYC</p>
+      <p>
+        Onboarding drop-off was concentrated in the verification steps, and the obvious read was a UX problem.
+        Cutting the data by segment told a different story: new-to-credit and thin-file users were failing for
+        different reasons, at different points — a one-size-fits-all KYC flow mismatched against customers with
+        very different risk profiles.
+      </p>
+      <p>
+        Risk and the lending partner wanted more checks; growth wanted fewer. Both were right. The funnel was
+        instrumented to quantify what each incremental check cost in activation versus caught in fraud, and that
+        evidence aligned everyone around a risk-based step-up flow — lighter verification where risk was low,
+        stricter where it spiked.
+      </p>
+      <div class="case-metrics">
+        <div class="cm"><div class="n">~25%</div><div class="l">lift in onboarding completion</div></div>
+        <div class="cm"><div class="n">0</div><div class="l">increase in fraud or offer drop-offs</div></div>
+        <div class="cm"><div class="n">4</div><div class="l">stakeholder groups aligned on one dataset</div></div>
+      </div>
+      <p style="margin-top:22px"><a href='/posts/risk-based-onboarding'>Read the full story →</a></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="case">
+      <h3>Halving partner query volume with product-led fixes</h3>
+      <p class="case-sub">B2B2C loan origination · Partner self-serve</p>
+      <p>
+        On the origination platform thousands of DSAs ran on, partners were raising more than ten queries per
+        disbursed loan, where their application was, why it was declined, when commission would land. Every query
+        was a product failure, and ops was drowning in them.
+      </p>
+      <p>
+        I treated contact ratio as a product metric, not an ops one. A live application tracker with plain-language
+        statuses, a self-serve document-correction flow, and a real-time payout dashboard removed the reasons
+        partners were calling in the first place.
+      </p>
+      <div class="case-metrics">
+        <div class="cm"><div class="n">&lt;5</div><div class="l">queries per disbursed loan, from 10+</div></div>
+        <div class="cm"><div class="n">&gt;50%</div><div class="l">reduction in contact ratio</div></div>
+        <div class="cm"><div class="n">↓</div><div class="l">ops load and partner escalations</div></div>
+      </div>
+      <p style="margin-top:22px"><a href='/posts/case-partner-queries'>Read the full story →</a></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="case">
+      <h3>Taking a digital card product offline, into a nationwide store network</h3>
+      <p class="case-sub">Phygital distribution · POS & in-store activation</p>
+      <p>
+        A card product that worked well digitally had a ceiling: customers who'd rather discover and activate
+        it in person, at a physical counter, with store staff guiding them. That meant designing for a completely
+        different environment — POS integration, QR-based in-store onboarding, and merchant activation workflows,
+        not just porting the app screen to a counter.
+      </p>
+      <p>
+        The result diversified acquisition beyond digital-only channels and brought down customer acquisition
+        cost, while proving the same credit and KYC logic could hold up in a messier, offline-first environment.
+      </p>
+      <div class="case-metrics">
+        <div class="cm"><div class="n">1,000s</div><div class="l">retail stores live</div></div>
+        <div class="cm"><div class="n">Millions</div><div class="l">monthly top-of-funnel traffic</div></div>
+        <div class="cm"><div class="n">↓</div><div class="l">customer acquisition cost</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="case">
+      <h3>Cutting order-related customer queries in half</h3>
+      <p class="case-sub">D2C e-commerce · Post-purchase self-serve</p>
+      <p>
+        On a fast-scaling D2C platform, the order-to-contact ratio was climbing as orders grew. Most tickets were
+        the same handful of questions: where is my order, how do I return this, when will my refund arrive.
+      </p>
+      <p>
+        Rather than grow support headcount in line with order volume, I closed the gaps at the source: proactive
+        status updates at each milestone, self-serve tracking and returns, and refund visibility. Self-serve scales
+        with volume; headcount doesn't.
+      </p>
+      <div class="case-metrics">
+        <div class="cm"><div class="n">~50%</div><div class="l">drop in order-to-contact ratio</div></div>
+        <div class="cm"><div class="n">↑</div><div class="l">self-serve resolution rate</div></div>
+        <div class="cm"><div class="n">↑</div><div class="l">post-purchase satisfaction</div></div>
+      </div>
+      <p style="margin-top:22px"><a href='/posts/case-order-to-contact'>Read the full story →</a></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2 class="label">Talkbeats</h2>
+    <p class="contact-line beats-line">Let your beats do the talking.</p>
+    <div class="contact-links">
+      <a href='/about'>About</a>
+      <a href='/contact'>Contact</a>
+    </div>
+    <p class="foot-note">© 2026 Talkbeats</p>
+  </div>
+</footer>
+
+<div class="fab-wrap">
+  <div class="fab-menu" id="fabMenu">
+    <a class="fab-item" id="fabEmail" href="mailto:chandragaur.pm@gmail.com" data-email="chandragaur.pm@gmail.com">✉️ <span class="fab-email-label">Email me</span></a>
+    <a class="fab-item" href="https://x.com/chandragaur_pm" target="_blank" rel="noopener">𝕏 Twitter</a>
+  </div>
+  <button class="fab-main" id="fabBtn" aria-label="Contact options">+</button>
+</div>
+<script>
+(function(){
+  var btn=document.getElementById('fabBtn'), menu=document.getElementById('fabMenu'), open=false;
+  btn.addEventListener('click', function(){
+    open=!open; menu.classList.toggle('open', open); btn.textContent = open ? '×' : '+';
+  });
+  var em=document.getElementById('fabEmail');
+  if(em){
+    em.addEventListener('click', function(){
+      var addr=em.getAttribute('data-email');
+      var lbl=em.querySelector('.fab-email-label');
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(addr).then(function(){
+          lbl.textContent='Address copied';
+          em.classList.add('copied');
+          setTimeout(function(){ lbl.textContent='Email me'; em.classList.remove('copied'); },2000);
+        }).catch(function(){});
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>

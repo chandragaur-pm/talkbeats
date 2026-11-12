@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing — Talkbeats</title>
+<meta name="description" content="Articles on product management, fintech, and building with AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<!-- Contentsquare / Hotjar -->
+<script src="https://t.contentsquare.net/uxa/6ddab5fcd6267.js" defer></script>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="/"><b>Talkbeats</b></a>
+    <ul class="nav-links">
+      <li><a class='active' href='/writing'>writing</a></li>
+      <li><a href='/case-studies'>case studies</a></li>
+      <li><a href='/resources'>resources</a></li>
+      <li><a href='/exercises'>exercises</a></li>
+      <li><a href='/about'>about</a></li>
+      <li><a href='/contact'>contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Writing</p>
+    <h1>Notes from building products.</h1>
+    <p class="hero-sub">What I learn while building — across fintech, lending, payments, and building with AI.</p>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="wrap-narrow">
+    <div class="post-list">
+
+      <a class='post-card' href='/posts/assisted-journeys'>
+        <div>
+          <div class="post-title">Assisted vs digital lending: the answer is both</div>
+          <p class="post-excerpt">Assisted journeys aren't a legacy model, and digital-first isn't automatically the future. The strongest lending products are designed for both ends of the spectrum.</p>
+          <div class="post-tags"><span class="post-tag">Fintech</span><span class="post-tag">Lending</span><span class="post-tag">Distribution</span></div>
+        </div>
+      </a>
+
+      <a class='post-card' href='/posts/lending-funnels-aiml'>
+        <div>
+          <div class="post-title">Why most lending funnels fail at the top, and how AI/ML can fix it</div>
+          <p class="post-excerpt">Strong top-of-funnel, single-digit conversion. The fix wasn't the UX. It was routing the right journey to the right user before the funnel even starts.</p>
+          <div class="post-tags"><span class="post-tag">Fintech</span><span class="post-tag">AI/ML</span><span class="post-tag">Lending</span></div>
+        </div>
+      </a>
+
+      <a class='post-card' href='/posts/partner-ecosystems-fintech'>
+        <div>
+          <div class="post-title">Building partner ecosystems in fintech: what they don't tell you</div>
+          <p class="post-excerpt">The press release is two logos on a page. The real work is wallet integration, reconciliation, and the API suite that decides whether a partnership scales.</p>
+          <div class="post-tags"><span class="post-tag">Fintech</span><span class="post-tag">Partnerships</span></div>
+        </div>
+      </a>
+
+      <a class='post-card' href='/posts/risk-based-onboarding'>
+        <div>
+          <div class="post-title">Risk-based onboarding: which checks, for which user</div>
+          <p class="post-excerpt">Drop-off looked like a UX problem. It wasn't. How segmenting by risk instead of redesigning the screen lifted onboarding completion ~25% with zero increase in fraud.</p>
+          <div class="post-tags"><span class="post-tag">Product</span><span class="post-tag">Fintech</span><span class="post-tag">Case study</span></div>
+        </div>
+      </a>
+
+      <a class='post-card' href='/posts/ai-pm-dashboard'>
+        <div>
+          <div class="post-title">I tried to build a Compass-style AI agent dashboard. Here's where it broke.</div>
+          <p class="post-excerpt">An internal tool where AI agents draft PRDs, specs, and UAT plans in parallel. I tried to build a version of it. The idea held up better than the implementation.</p>
+          <div class="post-tags"><span class="post-tag">AI</span><span class="post-tag">Build log</span></div>
+        </div>
+      </a>
+
+      <a class='post-card' href='/posts/compressed-ladder'>
+        <div>
+          <div class="post-title">AI hasn't made PMs less relevant. It's compressed the ladder.</div>
+          <p class="post-excerpt">The production work is disappearing fast. What's left is judgement, and judgement is getting scrutinised harder than ever.</p>
+          <div class="post-tags"><span class="post-tag">AI</span><span class="post-tag">Opinion</span></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2 class="label">Talkbeats</h2>
+    <p class="contact-line beats-line">Let your beats do the talking.</p>
+    <div class="contact-links">
+      <a href='/about'>About</a>
+      <a href='/contact'>Contact</a>
+    </div>
+    <p class="foot-note">© 2026 Talkbeats</p>
+  </div>
+</footer>
+
+<div class="fab-wrap">
+  <div class="fab-menu" id="fabMenu">
+    <a class="fab-item" id="fabEmail" href="mailto:chandragaur.pm@gmail.com" data-email="chandragaur.pm@gmail.com">✉️ <span class="fab-email-label">Email me</span></a>
+    <a class="fab-item" href="https://x.com/chandragaur_pm" target="_blank" rel="noopener">𝕏 Twitter</a>
+  </div>
+  <button class="fab-main" id="fabBtn" aria-label="Contact options">+</button>
+</div>
+<script>
+(function(){
+  var btn=document.getElementById('fabBtn'), menu=document.getElementById('fabMenu'), open=false;
+  btn.addEventListener('click', function(){
+    open=!open; menu.classList.toggle('open', open); btn.textContent = open ? '×' : '+';
+  });
+  var em=document.getElementById('fabEmail');
+  if(em){
+    em.addEventListener('click', function(){
+      var addr=em.getAttribute('data-email');
+      var lbl=em.querySelector('.fab-email-label');
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(addr).then(function(){
+          lbl.textContent='Address copied';
+          em.classList.add('copied');
+          setTimeout(function(){ lbl.textContent='Email me'; em.classList.remove('copied'); },2000);
+        }).catch(function(){});
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>

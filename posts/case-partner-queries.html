@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halving partner query volume through product-led fixes — Talkbeats</title>
+<meta name="description" content="A contact ratio of 10+ queries per disbursed loan. Treating it as a product metric, not an ops one, cut it by more than half.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+
+<!-- Contentsquare / Hotjar -->
+<script src="https://t.contentsquare.net/uxa/6ddab5fcd6267.js" defer></script>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="/"><b>Talkbeats</b></a>
+    <ul class="nav-links">
+      <li><a href='/'>home</a></li>
+      <li><a class='active' href='/case-studies'>case studies</a></li>
+      <li><a href='/resources'>resources</a></li>
+      <li><a href='/exercises'>exercises</a></li>
+      <li><a href='/about'>about</a></li>
+      <li><a href='/contact'>contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="post-crumb wrap-narrow">
+  <a href='/'>home</a>
+  <span class="crumb-sep">›</span>
+  <a href='/case-studies'>case studies</a>
+</div>
+
+<header class="post-header">
+  <div class="wrap-narrow">
+    <div class="post-meta">
+      <span>Case study · Lending platform</span>
+    </div>
+    <h1 class="post-h1">Halving partner query volume through product-led fixes</h1>
+    <p class="post-dek">A contact ratio of 10+ queries per disbursed loan. Treating it as a product metric, not an ops one, cut it by more than half.</p>
+  </div>
+</header>
+
+<article class="post-body">
+<h2>Background</h2>
+<p>I managed a B2B2C loan origination platform serving a large network of DSA and channel partners who sourced, documented, and tracked MSME loan applications on behalf of a lending institution. Partners ranged from large national DSAs to thousands of sub-partners operating across the country.</p>
+<p>One of the metrics I tracked closely was what I called the "contact ratio" — the number of queries a partner raised per disbursed loan. Every query represented a failure in the product: something the partner couldn't find, couldn't understand, or couldn't resolve without human intervention. At scale, high contact ratios meant the ops and support teams were overwhelmed, partner satisfaction was suffering, and the cost-per-loan was quietly inflating.</p>
+<h2>The Problem</h2>
+<p>When I took ownership of this metric, the contact ratio was running at more than 10 queries per disbursed loan. Partners were regularly raising queries about:</p>
+<ul>
+<li>Where their loan application was in the pipeline</li>
+<li>Why a loan had been declined or put on hold</li>
+<li>When their payout or commission would be processed</li>
+<li>How to correct documentation errors after submission</li>
+<li>Status of FI verification and KYC steps</li>
+</ul>
+<p>The volume was significant enough that ops teams were spending a large portion of their time managing inbound partner queries rather than processing loans. Partners, in turn, were frustrated by slow resolutions — which affected their trust in the platform and, in some cases, their willingness to continue sourcing leads.</p>
+<p>The instinctive fix was to hire more support staff. The right fix was to ask why partners were raising these queries in the first place — and eliminate the need at the source.</p>
+<h2>The Approach</h2>
+<p>I treated contact ratio as a product metric, not an ops metric. Every query category was a signal that the product was failing to give partners the information or control they needed, at the moment they needed it.</p>
+<p><strong>Step 1: Query taxonomy.</strong> I worked with the ops team to categorize inbound partner queries by type, frequency, and stage of the loan journey. This created a ranked list of the highest-volume query types — the ones where fixing the product would have the most immediate impact on contact ratio.</p>
+<p><strong>Step 2: Visibility improvements.</strong> The single largest query category was application status — partners couldn't see where their loan applications were in the pipeline in real time. I built a live application tracking layer into the platform, surfacing status updates at each stage of the journey (submitted, under review, terms generated, KYC pending, disbursed, declined) with clear, plain-language explanations for each state — including decline reasons, which had previously required a support call to obtain.</p>
+<p><strong>Step 3: Self-serve documentation correction.</strong> A significant portion of queries were about correcting documentation errors after submission. I built a self-serve document re-upload and correction flow, allowing partners to fix errors without raising a support ticket and without waiting for an ops agent to intervene.</p>
+<p><strong>Step 4: Payout transparency.</strong> Commission and payout queries were the second-largest category. I built a real-time payout dashboard showing partners the status of each payout — disbursed, processing, settled — along with the calculation breakdown for performance slab-based commissions. This eliminated the need to query ops for payout status or commission reconciliation.</p>
+<p><strong>Step 5: In-platform guidance.</strong> For query types that couldn't be fully eliminated through self-serve (FI verification timelines, co-lending status), I added contextual in-platform guidance — explaining what each stage meant, what the expected timeline was, and what action, if any, the partner needed to take.</p>
+<h2>Results</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Partner queries per disbursed loan</td>
+<td>10+ queries</td>
+<td>Under 5 queries</td>
+</tr>
+<tr>
+<td>Contact ratio reduction</td>
+<td>—</td>
+<td>More than 50% reduction</td>
+</tr>
+<tr>
+<td>Ops time spent on inbound partner queries</td>
+<td>High</td>
+<td>Significantly reduced</td>
+</tr>
+<tr>
+<td>Partner satisfaction</td>
+<td>Frequent escalations</td>
+<td>Materially fewer escalations</td>
+</tr>
+</tbody>
+</table>
+<h2>Key Takeaways</h2>
+<p><strong>Contact ratio is a product metric, not an ops metric.</strong> Every query a partner raises is a product failure — a gap between what the partner needed to know and what the platform surfaced. Treating it as an ops workload problem leads to hiring more support staff. Treating it as a product problem leads to eliminating the query at the source.</p>
+<p><strong>Visibility is the highest-leverage fix.</strong> Across every query category I analyzed, the most common root cause was the same: the partner couldn't see what was happening. Real-time status, plain-language explanations, and proactive notifications eliminated more queries per unit of effort than any other intervention.</p>
+<p><strong>Self-serve beats support at scale.</strong> When a partner network is large enough, even a small reduction in query rate per partner has a compounding effect on ops load. Self-serve correction flows and payout dashboards scaled naturally with partner growth — unlike support headcount, which doesn't.</p>
+</article>
+
+<div class="share-row wrap-narrow">
+  <span class="share-label">Share</span>
+  <a class="share-btn" data-net="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https://talkbeats.in/posts/case-partner-queries.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05C20.6 8.65 22 11 22 14.6V21h-4v-5.7c0-1.36-.02-3.1-1.9-3.1-1.9 0-2.2 1.48-2.2 3v5.8H9z"/></svg>
+  </a>
+  <a class="share-btn" data-net="x" href="https://twitter.com/intent/tweet?url=https://talkbeats.in/posts/case-partner-queries.html&amp;text=Halving%20partner%20query%20volume%20through%20product-led%20fixes" target="_blank" rel="noopener" aria-label="Share on X">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.2-6.82-5.96 6.82H1.7l7.73-8.84L1.28 2.25h6.82l4.71 6.23zm-1.16 17.52h1.83L7.02 4.13H5.05z"/></svg>
+  </a>
+  <a class="share-btn" data-net="whatsapp" href="https://wa.me/?text=Halving%20partner%20query%20volume%20through%20product-led%20fixes%20https://talkbeats.in/posts/case-partner-queries.html" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.53.07-.8.38-.28.3-1.05 1.03-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.12 3.24 5.14 4.54.72.31 1.28.5 1.71.63.72.23 1.37.2 1.89.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35zM12.05 2C6.53 2 2.05 6.48 2.05 12c0 1.77.46 3.5 1.34 5.02L2 22l5.1-1.34A9.93 9.93 0 0 0 12.05 22c5.52 0 10-4.48 10-10s-4.48-10-10-10zm0 18.31c-1.6 0-3.17-.43-4.53-1.24l-.33-.19-3.03.79.81-2.95-.21-.34a8.28 8.28 0 0 1-1.27-4.4c0-4.58 3.73-8.3 8.31-8.3 2.22 0 4.3.86 5.87 2.43a8.24 8.24 0 0 1 2.43 5.88c0 4.58-3.73 8.32-8.31 8.32z"/></svg>
+  </a>
+  <a class="share-btn" data-net="telegram" href="https://t.me/share/url?url=https://talkbeats.in/posts/case-partner-queries.html&amp;text=Halving%20partner%20query%20volume%20through%20product-led%20fixes" target="_blank" rel="noopener" aria-label="Share on Telegram">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.94 4.3 18.9 19.2c-.23 1.02-.84 1.27-1.7.79l-4.7-3.46-2.27 2.18c-.25.25-.46.46-.94.46l.33-4.77 8.68-7.84c.38-.34-.08-.53-.59-.19L6.98 13.1l-4.62-1.45c-1-.31-1.02-1 .21-1.48l18.06-6.96c.83-.31 1.56.2 1.31 1.09z"/></svg>
+  </a>
+  <button class="share-btn share-copy" data-url="https://talkbeats.in/posts/case-partner-queries.html" aria-label="Copy link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.1.1l3-3a5 5 0 0 0-7.1-7.1L11.3 4.7"/><path d="M14 11a5 5 0 0 0-7.1-.1l-3 3a5 5 0 0 0 7.1 7.1l1.7-1.7"/></svg>
+    <span class="copy-txt">Copy link</span>
+  </button>
+</div>
+
+<nav class="post-nav wrap-narrow" aria-label="Article navigation">
+  <a class='pn-item pn-prev' href='/posts/case-emi-activation'>
+    <span class="pn-dir">← Previous</span>
+    <span class="pn-title">Lifting co-branded EMI card activation 2x with personalization</span>
+  </a>
+  <a class='pn-item pn-next' href='/posts/case-order-to-contact'>
+    <span class="pn-dir">Next →</span>
+    <span class="pn-title">Cutting order-related customer queries ~50% with self-serve</span>
+  </a>
+</nav>
+
+<div class="post-nav-index wrap-narrow">
+  <a href='/case-studies'>All case studies</a>
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2 class="label">Talkbeats</h2>
+    <p class="contact-line beats-line">Let your beats do the talking.</p>
+    <div class="contact-links">
+      <a href='/about'>About</a>
+      <a href='/contact'>Contact</a>
+    </div>
+    <p class="foot-note">© 2026 Talkbeats</p>
+  </div>
+</footer>
+
+<div class="fab-wrap">
+  <div class="fab-menu" id="fabMenu">
+    <a class="fab-item" id="fabEmail" href="mailto:chandragaur.pm@gmail.com" data-email="chandragaur.pm@gmail.com">✉️ <span class="fab-email-label">Email me</span></a>
+    <a class="fab-item" href="https://x.com/chandragaur_pm" target="_blank" rel="noopener">𝕏 Twitter</a>
+  </div>
+  <button class="fab-main" id="fabBtn" aria-label="Contact options">+</button>
+</div>
+<script>
+(function(){
+  var btn=document.getElementById('fabBtn'), menu=document.getElementById('fabMenu'), open=false;
+  btn.addEventListener('click', function(){
+    open=!open; menu.classList.toggle('open', open); btn.textContent = open ? '\u00d7' : '+';
+  });
+  var em=document.getElementById('fabEmail');
+  if(em){
+    em.addEventListener('click', function(){
+      var addr=em.getAttribute('data-email');
+      var lbl=em.querySelector('.fab-email-label');
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(addr).then(function(){
+          lbl.textContent='Address copied';
+          em.classList.add('copied');
+          setTimeout(function(){ lbl.textContent='Email me'; em.classList.remove('copied'); },2000);
+        }).catch(function(){});
+      }
+    });
+  }
+})();
+</script>
+<script>
+(function(){
+  var b=document.querySelector('.share-copy');
+  if(!b) return;
+  b.addEventListener('click', function(){
+    var u=b.getAttribute('data-url'), s=b.querySelector('.copy-txt');
+    var done=function(){ s.textContent='Copied'; b.classList.add('copied'); setTimeout(function(){ s.textContent='Copy link'; b.classList.remove('copied'); },1800); };
+    if(navigator.clipboard){ navigator.clipboard.writeText(u).then(done); }
+    else { var ta=document.createElement('textarea'); ta.value=u; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); done(); }
+  });
+})();
+</script>
+</body>
+</html>
