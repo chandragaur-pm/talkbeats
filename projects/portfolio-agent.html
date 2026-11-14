@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Agent: a rule-based screener for my own holdings — Talkbeats</title>
+<meta name="description" content="A local, read-only screener that merges holdings from two brokers and measures each against my own written rules. Interactive demo with sample data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+
+<!-- Contentsquare / Hotjar -->
+<script src="https://t.contentsquare.net/uxa/6ddab5fcd6267.js" defer></script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KJLSYR2ZPS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KJLSYR2ZPS');
+</script>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="/"><b>Talkbeats</b></a>
+    <ul class="nav-links">
+      <li><a href='/'>home</a></li>
+      <li><a href='/case-studies'>case studies</a></li>
+      <li><a href='/resources'>resources</a></li>
+      <li><a href='/exercises'>exercises</a></li>
+      <li><a href='/about'>about</a></li>
+      <li><a href='/contact'>contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="post-crumb wrap-narrow">
+  <a href='/'>home</a>
+  <span class="crumb-sep">›</span>
+  <a href='/about'>about</a>
+</div>
+
+<header class="post-header">
+  <div class="wrap-narrow">
+    <div class="post-meta">
+      <span>Project · Build log</span>
+    </div>
+    <h1 class="post-h1">Portfolio Agent: a rule-based screener for my own holdings</h1>
+    <p class="post-dek">A small local tool that merges holdings from two brokers and measures each position against thresholds I wrote down in advance. No AI opinions, no news, no orders.</p>
+  </div>
+</header>
+
+<style>
+.pj-actions{display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 30px}
+.pj-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:8px 0 22px}
+.pj-stat{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.pj-stat b{display:block;font-family:'IBM Plex Mono',monospace;font-size:26px;color:var(--ink)}
+.pj-stat span{color:var(--muted);font-size:14px}
+.pj-note{background:#FFF8E6;border:1px solid #EAD9A6;border-radius:6px;padding:12px 16px;font-size:15px;margin:0 0 26px}
+.pj-rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:6px 0 16px}
+.pj-rules label{display:block;font-size:13px;color:var(--muted)}
+.pj-rules b{font-family:'IBM Plex Mono',monospace;color:var(--ink)}
+.pj-rules input{width:100%;accent-color:var(--blue)}
+.pj-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.pj-chip{font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px solid var(--line);background:#fff;color:var(--blue);border-radius:99px;padding:4px 12px;cursor:pointer}
+.pj-chip.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.pj-tw{overflow-x:auto}
+article.post-body table.pj-t{margin:0;font-size:14.5px}
+.pj-t th{font-family:'IBM Plex Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:left;padding:8px 8px;border-bottom:1px solid var(--line)}
+.pj-t td{padding:10px 8px;border-bottom:1px solid var(--line)}
+.pj-t tbody tr{cursor:pointer}.pj-t tbody tr:hover{background:#EEF3F8}
+.pj-pill{display:inline-block;border-radius:99px;padding:2px 10px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600}
+.pj-good{background:#E3F3EC;color:var(--good)}.pj-bad{background:#FBE7E7;color:#B33A3A}.pj-warn{background:#FFF1D6;color:#8A6410}.pj-neu{background:#EDF0F4;color:var(--muted)}
+.pj-detail{display:none;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin-top:14px}
+.pj-detail h3{margin:0 0 4px!important;font-size:17px!important}
+.pj-chk{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+.pj-chk:last-child{border:0}
+.pj-grp{margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+@media(max-width:560px){.pj-t th:nth-child(4),.pj-t td:nth-child(4),.pj-t th:nth-child(5),.pj-t td:nth-child(5){display:none}}
+</style>
+<article class="post-body">
+<div class="pj-note"><b>Sample data only.</b> Every company, number and signal below is made up to show how the screen behaves. This page connects to no broker and holds no real portfolio.</div>
+
+<h2>Why I built it</h2>
+<p>Holdings sat in two apps, and each one only told me what I owned, not whether it still met the standards I bought it on. So I wrote those standards down and built a small tool to measure every position against them.</p>
+<ul>
+  <li><b>One combined view.</b> The same stock held in two places is merged into a single line with blended average cost.</li>
+  <li><b>My rules, written down.</b> Thresholds live in one JSON file. A value set to null switches that check off. Change a number, re-run, see what flips.</li>
+  <li><b>Read-only by design.</b> It can see holdings and nothing else. It runs on my own machine and the broker tokens never leave it.</li>
+</ul>
+
+<h2>Try the screen</h2>
+<p>Move the thresholds and watch the signals change. Click any row to see exactly which checks passed.</p>
+<div class="pj-rules">
+  <div><label>Max P/E: <b id="vPE"></b></label><input id="rPE" type="range" min="10" max="80" value="40"></div>
+  <div><label>Min ROE %: <b id="vROE"></b></label><input id="rROE" type="range" min="5" max="30" value="15"></div>
+  <div><label>RSI ceiling for entry: <b id="vRSI"></b></label><input id="rRSI" type="range" min="45" max="80" value="60"></div>
+  <div><label>Max % above 50-day average: <b id="vEXT"></b></label><input id="rEXT" type="range" min="1" max="20" value="5"></div>
+</div>
+<div class="pj-chips" id="chips"></div>
+<div class="pj-tw"><table class="pj-t">
+  <thead><tr><th>Holding</th><th>Signal</th><th>Trend</th><th>Weight</th><th>Return</th></tr></thead>
+  <tbody id="rows"></tbody>
+</table></div>
+<div class="pj-detail" id="detail"></div>
+
+<h2>How a signal is decided</h2>
+<ul>
+  <li><b>Valuation, quality and growth</b> are each a small set of pass/fail checks (P/E, ROE and ROCE, 3-year sales and profit growth). Two of the three groups must pass for the fundamentals to count.</li>
+  <li><b>Entry</b> is a separate technical check: allowed trend, RSI inside a band, and not stretched above the 50-day average.</li>
+  <li><b>ENTRY ZONE</b> means fundamentals pass and entry passes. <b>WAIT FOR ENTRY</b> means fundamentals pass but entry does not. <b>TECHNICAL ONLY</b> is the reverse. <b>FAILS RULES</b> means neither.</li>
+  <li><b>ETFs</b> have no company fundamentals, so they skip those checks and are labelled as ETFs instead of failing.</li>
+</ul>
+
+<h2>Under the hood</h2>
+<ul>
+  <li>A Next.js app bound to localhost only. Price history comes from public market data and fundamentals from a public company-data site, cached locally.</li>
+  <li>Holdings come from each broker's read-only holdings call. Sessions are stored locally and expire daily, so nothing long-lived sits on disk.</li>
+  <li>Exit and entry planners turn the same rules into staged levels (stops, tranches, targets). They are risk-control arithmetic, not predictions.</li>
+  <li>Adapted from an open-source Kite-based screener by VisahanA, rewritten for two Indian brokers with a combined view.</li>
+</ul>
+<div class="post-callout">Illustrative sample data and an educational build project. Not investment advice, and not a recommendation to buy or sell anything.</div>
+</article>
+
+<div class="post-nav-index wrap-narrow">
+  <a href='/about'>Back to about</a>
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2 class="label">Talkbeats</h2>
+    <p class="contact-line beats-line">Let your beats do the talking.</p>
+    <div class="contact-links">
+      <a href='/about'>About</a>
+      <a href='/contact'>Contact</a>
+    </div>
+    <p class="foot-note">© 2026 Talkbeats</p>
+  </div>
+</footer>
+
+<div class="fab-wrap">
+  <div class="fab-menu" id="fabMenu">
+    <a class="fab-item" id="fabEmail" href="mailto:chandragaur.pm@gmail.com" data-email="chandragaur.pm@gmail.com">✉️ <span class="fab-email-label">Email me</span></a>
+    <a class="fab-item" href="https://x.com/chandragaur_pm" target="_blank" rel="noopener">𝕏 Twitter</a>
+  </div>
+  <button class="fab-main" id="fabBtn" aria-label="Contact options">+</button>
+</div>
+<script>
+(function(){
+  var btn=document.getElementById('fabBtn'), menu=document.getElementById('fabMenu'), open=false;
+  btn.addEventListener('click', function(){
+    open=!open; menu.classList.toggle('open', open); btn.textContent = open ? '\u00d7' : '+';
+  });
+  var em=document.getElementById('fabEmail');
+  if(em){
+    em.addEventListener('click', function(){
+      var addr=em.getAttribute('data-email');
+      var lbl=em.querySelector('.fab-email-label');
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(addr).then(function(){
+          lbl.textContent='Address copied';
+          em.classList.add('copied');
+          setTimeout(function(){ lbl.textContent='Email me'; em.classList.remove('copied'); },2000);
+        }).catch(function(){});
+      }
+    });
+  }
+})();
+</script>
+<script>
+
+// Fictional holdings. type 'etf' skips company fundamentals, like the real app.
+const D=[
+ {s:'NORTHWIND AUTO',type:'stock',w:17,ret:12.4,trend:'Uptrend',rsi:52,ext:3.1,pe:24,roe:21,roce:24,sg:14,pg:18},
+ {s:'ORBIT PHARMA',type:'stock',w:14,ret:-3.8,trend:'Downtrend',rsi:38,ext:-6.2,pe:46,roe:11,roce:12,sg:6,pg:4},
+ {s:'HALCYON BANK',type:'stock',w:13,ret:9.6,trend:'Recovering',rsi:58,ext:4.4,pe:17,roe:17,roce:null,sg:15,pg:16},
+ {s:'MERIDIAN FOODS',type:'stock',w:11,ret:15.1,trend:'Uptrend',rsi:71,ext:12.5,pe:38,roe:19,roce:22,sg:10,pg:12},
+ {s:'CEDAR INFRA',type:'stock',w:10,ret:0.4,trend:'Weakening',rsi:44,ext:-1.5,pe:52,roe:9,roce:10,sg:7,pg:5},
+ {s:'GOLD ETF (SAMPLE)',type:'etf',w:18,ret:-0.1,trend:'Downtrend',rsi:41,ext:-2.2},
+ {s:'SILVER ETF (SAMPLE)',type:'etf',w:17,ret:0.0,trend:'Downtrend',rsi:43,ext:-3.0}
+];
+const ALLOWED=['Uptrend','Recovering'];
+const $=id=>document.getElementById(id);
+let filter='All',sel=null;
+const R=()=>({pe:+$('rPE').value,roe:+$('rROE').value,rsi:+$('rRSI').value,ext:+$('rEXT').value});
+function screen(h,r){
+  const entry=[
+    ['Trend: '+h.trend,ALLOWED.includes(h.trend),'Uptrend / Recovering'],
+    ['RSI(14) floor',h.rsi>=35,'≥ 35 (now '+h.rsi+')'],
+    ['RSI(14) ceiling',h.rsi<=r.rsi,'≤ '+r.rsi+' (now '+h.rsi+')'],
+    ['Not extended above 50-day avg',h.ext<=r.ext,'≤ '+r.ext+'% (now '+h.ext+'%)']];
+  let val=[],qual=[],gr=[];
+  if(h.type==='stock'){
+    val=[['P/E',h.pe!=null&&h.pe>0&&h.pe<=r.pe,'≤ '+r.pe+' (now '+h.pe+')']];
+    qual=[['ROE %',h.roe>=r.roe,'≥ '+r.roe+' (now '+h.roe+')']];
+    if(h.roce!=null) qual.push(['ROCE %',h.roce>=15,'≥ 15 (now '+h.roce+')']);
+    gr=[['Sales growth 3y %',h.sg>=8,'≥ 8 (now '+h.sg+')'],['Profit growth 3y %',h.pg>=10,'≥ 10 (now '+h.pg+')']];
+  }
+  const ok=a=>a.length&&a.every(c=>c[1]);
+  const entryOk=ok(entry);
+  let signal;
+  if(h.type==='etf') signal='ETF';
+  else{const f=[val,qual,gr].filter(ok).length>=2;signal=f?(entryOk?'ENTRY ZONE':'WAIT FOR ENTRY'):(entryOk?'TECHNICAL ONLY':'FAILS RULES');}
+  return {signal,entry,val,qual,gr};
+}
+const cls=s=>s==='ENTRY ZONE'?'pj-good':s==='FAILS RULES'?'pj-bad':(s==='WAIT FOR ENTRY'||s==='TECHNICAL ONLY')?'pj-warn':'pj-neu';
+function render(){
+  const r=R();
+  $('vPE').textContent=r.pe;$('vROE').textContent=r.roe;$('vRSI').textContent=r.rsi;$('vEXT').textContent=r.ext+'%';
+  const res=D.map(h=>({h,x:screen(h,r)}));
+  const sigs=['All',...new Set(res.map(o=>o.x.signal))];
+  $('chips').innerHTML=sigs.map(s=>`<button class="pj-chip${s===filter?' on':''}" data-s="${s}">${s}</button>`).join('');
+  if(!sigs.includes(filter))filter='All';
+  const shown=res.filter(o=>filter==='All'||o.x.signal===filter);
+  $('rows').innerHTML=shown.map(o=>`<tr data-n="${o.h.s}"><td><b>${o.h.s}</b></td><td><span class="pj-pill ${cls(o.x.signal)}">${o.x.signal}</span></td><td>${o.h.trend}</td><td>${o.h.w}%</td><td style="color:${o.h.ret>=0?'var(--good)':'#B33A3A'}">${o.h.ret>0?'+':''}${o.h.ret}%</td></tr>`).join('');
+  showDetail(res);
+}
+function group(t,a){return a.length?`<div style="margin-top:10px"><div class="pj-grp" style="margin:0">${t}</div>${a.map(c=>`<div class="pj-chk"><span>${c[0]}</span><span><span style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:12.5px">${c[2]}</span> <span class="pj-pill ${c[1]?'pj-good':'pj-bad'}">${c[1]?'PASS':'FAIL'}</span></span></div>`).join('')}</div>`:''}
+function showDetail(res){
+  const d=$('detail');if(!sel){d.style.display='none';return}
+  const o=res.find(o=>o.h.s===sel);if(!o){d.style.display='none';return}
+  d.style.display='block';
+  d.innerHTML=`<h3>${o.h.s} <span class="pj-pill ${cls(o.x.signal)}">${o.x.signal}</span></h3>`+
+   (o.h.type==='etf'?'<p style="margin:6px 0 0;color:var(--muted)">ETF: company fundamentals do not apply, so only the technical entry check runs.</p>':'')+
+   group('Entry (technical)',o.x.entry)+group('Valuation',o.x.val)+group('Quality',o.x.qual)+group('Growth',o.x.gr);
+}
+document.addEventListener('click',e=>{
+  const c=e.target.closest('.pj-chip');if(c){filter=c.dataset.s;render();return}
+  const t=e.target.closest('#rows tr');if(t){sel=t.dataset.n;render();}
+});
+['rPE','rROE','rRSI','rEXT'].forEach(id=>$(id).addEventListener('input',render));
+render();
+
+</script>
+</body>
+</html>
